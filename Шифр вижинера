@@ -1,0 +1,37 @@
+# 1)encrypt/decrypt
+# 2) your message
+# 3)the key
+
+def crypt(text,key,answer):
+    list=[]
+    p=0
+    for character in text:
+        if ord(character)==32:
+            list.append("_") 
+        elif character=="_":
+            list.append(character) 
+        else:
+            number=ord(character)-96
+            list.append(number)
+    while p<len(list):  
+        if list[p]=="_": 
+            list[p]=chr(32)
+            p+=1 
+        elif answer=="encrypt":
+            list[p]=chr(((list[p]+ord(key[p%len(key)]))%26)+96)
+            p+=1
+        elif answer=="decrypt":
+            list[p]=chr(((list[p]-ord(key[p%len(key)]))%26)+96)
+            p+=1
+    code=''.join(map(str,list))
+    return code
+repeat=True
+while repeat==True:
+    answer=input("encrypt or decrypt")
+    if answer!="encrypt" and answer!="decrypt":
+        print("unknown message")
+    else:
+        text=input("Enter the message: ")
+        key=input("Enter the key: ")
+        print("your message is [",crypt(text,key,answer),"]")
+        repeat=False
